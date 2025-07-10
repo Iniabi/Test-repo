@@ -11,10 +11,18 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
+      with:
+        # 强制保留文件权限
+        persist-credentials: false
+        fetch-depth: 0
 
-    # 确保权限设置
-    - name: Set gradlew executable
-      run: chmod +x gradlew
+    # 绝对确保权限
+    - name: Fix permissions
+      run: |
+        git config --global core.fileMode true
+        git update-index --chmod=+x gradlew
+        chmod +x gradlew
+        ls -l gradlew
 
     - name: Set up JDK 11
       uses: actions/setup-java@v3
@@ -22,11 +30,16 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
 
-    - name: Build with Gradle
-      run: ./gradlew assembleDebug --stacktrace --info
+    # 最简构建命令
+    - name: Build APK
+      run: ./gradlew assembleDebug
 
-    - name: Upload APK
+    # 直接上传APK（无论是否存在）
+    - name: Upload artifact
       uses: actions/upload-artifact@v4
       with:
         name: pixel-plane-game
-        path: app/build/outputs/apk/**/*.apk
+        path: |
+          app/build/outputs/apk/**/*.apk
+          !**/output.json  # 排除非APK文件
+        if-no-files-found: warn
