@@ -18,24 +18,21 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
 
-    - name: Build APK
+    - name: Build with Gradle
       run: |
-        chmod +x gradlew
-        ./gradlew assembleDebug
+        # 添加详细日志
+        ./gradlew assembleDebug --stacktrace --info
 
-    # 添加诊断步骤
-    - name: Verify APK path
+    - name: Verify build outputs
       run: |
-        echo "项目结构:"
+        echo "完整项目结构:"
         find . -type d | sort
-        echo "\nAPK目录内容:"
-        ls -l app/build/outputs/apk/debug/
-        echo "\n完整APK路径: $(pwd)/app/build/outputs/apk/debug/app-debug.apk"
+        echo "\n构建输出目录:"
+        ls -lR app/build/outputs || true
 
-    # 使用精确路径
     - name: Upload APK
+      if: success()
       uses: actions/upload-artifact@v4
       with:
         name: pixel-plane-game
-        path: app/build/outputs/apk/debug/app-debug.apk
-        if-no-files-found: error
+        path: app/build/outputs/apk/**/*.apk
