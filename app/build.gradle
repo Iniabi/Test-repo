@@ -3,38 +3,26 @@ plugins {
 }
 
 android {
-    namespace 'com.example.planegame'
+    namespace 'com.example.pixelplanegame'
     compileSdk 34
 
     defaultConfig {
-        applicationId "com.example.planegame"
+        applicationId "com.example.pixelplanegame"
         minSdk 24
         targetSdk 34
         versionCode 1
         versionName "1.0"
-        
-        # 关键修复：启用构建功能
-        buildFeatures {
-            viewBinding true
-        }
     }
 
     buildTypes {
-        debug {
-            # 确保debug构建类型存在
-            minifyEnabled false
-            debuggable true
-        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-    
-    # 添加缺失的配置块
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_11
-        targetCompatibility JavaVersion.VERSION_11
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
 }
 
