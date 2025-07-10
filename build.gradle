@@ -1,4 +1,3 @@
-// 确保仓库显式声明
 buildscript {
     repositories {
         google()
@@ -9,7 +8,6 @@ buildscript {
     }
 }
 
-// 为子项目显式添加仓库
 subprojects {
     repositories {
         google()

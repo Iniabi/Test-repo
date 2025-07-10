@@ -11,36 +11,18 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
+    
+    - name: Setup Java
+      uses: actions/setup-java@v3
       with:
-        # 强制保留文件权限
-        persist-credentials: false
-        fetch-depth: 0
+        java-version: '17'
+        distribution: 'temurin'
+        
+    - name: Build with Gradle
+      run: ./gradlew assembleDebug
 
-    # 原子级权限修复
-    - name: Fix permissions atomically
-      run: |
-        # 确保所有文件可读
-        find . -type f -exec chmod 0644 {} \;
-        # 确保所有目录可访问
-        find . -type d -exec chmod 0755 {} \;
-        # 单独设置gradlew权限
-        chmod +x gradlew
-        # 验证权限
-        ls -l gradlew
-        stat gradlew
-
-    # 使用容器化Gradle环境
-    - name: Build with Gradle container
-      uses: gradle/gradle-build-action@v2
-      with:
-        arguments: assembleDebug
-        gradle-version: 8.2
-
-    # 直接使用绝对路径上传
     - name: Upload APK
       uses: actions/upload-artifact@v4
       with:
-        name: pixel-plane-game
-        path: |
-          ${{ github.workspace }}/app/build/outputs/apk/**/*.apk
-          !**/*.json
+        name: app-debug
+        path: app/build/outputs/apk/debug/*.apk

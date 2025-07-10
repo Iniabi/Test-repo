@@ -1,4 +1,3 @@
-// 强制仓库模式
 pluginManagement {
     repositories {
         gradlePluginPortal()
