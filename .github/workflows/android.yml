@@ -18,6 +18,9 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
         
+    - name: Fix gradlew permission
+      run: chmod +x ./gradlew  # 关键修复：添加执行权限
+        
     - name: Build with Gradle
       run: ./gradlew assembleDebug
 
