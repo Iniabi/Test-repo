@@ -1,3 +1,4 @@
+// Android项目模块定义
 pluginManagement {
     repositories {
         google()
