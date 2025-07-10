@@ -20,7 +20,6 @@ jobs:
 
     - name: Build APK
       run: |
-        cd app
         chmod +x gradlew
         ./gradlew assembleDebug
 
@@ -28,4 +27,4 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: pixel-plane-game
-        path: app/build/outputs/apk/debug/app-debug.apk
+        path: app/build/outputs/apk/debug/*.apk
