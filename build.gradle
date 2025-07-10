@@ -1,7 +1,19 @@
-// 精简版顶级构建配置
+// 确保仓库显式声明
 buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
     dependencies {
         classpath 'com.android.tools.build:gradle:8.2.0'
+    }
+}
+
+// 为子项目显式添加仓库
+subprojects {
+    repositories {
+        google()
+        mavenCentral()
     }
 }
 

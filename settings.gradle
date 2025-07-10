@@ -1,4 +1,4 @@
-// 统一仓库管理
+// 强制仓库模式
 pluginManagement {
     repositories {
         gradlePluginPortal()
@@ -8,7 +8,7 @@ pluginManagement {
 }
 
 dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
         google()
         mavenCentral()
