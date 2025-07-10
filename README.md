@@ -11,10 +11,10 @@ A retro-style pixel plane shooter game for Android
 ## Build Instructions
 ```bash
 # Clone repository
-git clone https://github.com/iniabi/pixel-plane-fighter.git
+git clone https://github.com/iniabi/test-repo.git
 
 # Build APK
-cd pixel-plane-fighter
+cd test-repo
 ./gradlew assembleDebug
 ```
 
